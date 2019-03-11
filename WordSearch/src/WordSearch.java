@@ -44,12 +44,7 @@ public class WordSearch {
     private static int heapSize = 0;
     
     private static void saveTop(WordScore ws)
-    {
-    	if (minHeap == null) {
-    		minHeap = new PriorityQueue<WordScore>();
-    		heapSize = 0;
-    	}
-    	
+    {    	
 		if (heapSize < TOP_COUNT) {
 			minHeap.add(ws);
 			heapSize++;
@@ -151,7 +146,11 @@ public class WordSearch {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		File dictFile = new File("dictionary.txt");		
+		/* create min-Heap */
+   		minHeap = new PriorityQueue<WordScore>();
+   		heapSize = 0;
+
+    	File dictFile = new File("dictionary.txt");		
 		File wordFile = new File("word-search.txt");
 		
 		/* Form N x N dictionary matrix 
@@ -199,7 +198,9 @@ public class WordSearch {
 			}
 		}
 		PrintWriter outputFile = new PrintWriter("output.txt");
-		outputFile.println(outStr);
+		if (outStr != null) {
+			outputFile.println(outStr);
+		}
 		outputFile.close();
 		//System.out.println(outStr);
 	}
